@@ -1,6 +1,7 @@
 
 import React from 'react';
-import { PostureData, PostureState } from '../types';
+import { PostureState } from '../../types';
+import type { PostureData } from '../../types';
 
 interface LiveViewProps {
   data: PostureData;
@@ -34,9 +35,7 @@ const LiveView: React.FC<LiveViewProps> = ({ data }) => {
           </div>
           
           <div className="w-full h-full flex items-center justify-center">
-            {/* SVG Silhouette representation */}
             <svg width="240" height="400" viewBox="0 0 240 400" className="transition-all duration-500">
-              {/* Head */}
               <circle 
                 cx="120" 
                 cy={data.neckStatus === 'Forward' ? 95 : 80} 
@@ -44,7 +43,6 @@ const LiveView: React.FC<LiveViewProps> = ({ data }) => {
                 fill={data.neckStatus === 'Forward' ? '#fecaca' : '#ccfbf1'} 
                 className="transition-all duration-500"
               />
-              {/* Spine */}
               <path 
                 d={data.backStatus === 'Straight' ? "M120 115 L120 300" : "M120 115 Q150 200 120 300"}
                 stroke={data.backStatus === 'Straight' ? '#2dd4bf' : '#fecaca'} 
@@ -53,22 +51,8 @@ const LiveView: React.FC<LiveViewProps> = ({ data }) => {
                 fill="none"
                 className="transition-all duration-500"
               />
-              {/* Shoulders */}
-              <line 
-                x1="80" y1="130" 
-                x2="160" y2="130" 
-                stroke="#14b8a6" 
-                strokeWidth="18" 
-                strokeLinecap="round" 
-              />
-              {/* Hips */}
-              <line 
-                x1="90" y1="300" 
-                x2="150" y2="300" 
-                stroke="#0d9488" 
-                strokeWidth="24" 
-                strokeLinecap="round" 
-              />
+              <line x1="80" y1="130" x2="160" y2="130" stroke="#14b8a6" strokeWidth="18" strokeLinecap="round" />
+              <line x1="90" y1="300" x2="150" y2="300" stroke="#0d9488" strokeWidth="24" strokeLinecap="round" />
             </svg>
           </div>
 
@@ -84,7 +68,6 @@ const LiveView: React.FC<LiveViewProps> = ({ data }) => {
           </div>
         </div>
 
-        {/* Real-time stats */}
         <div className="flex flex-col gap-8">
           <div className="bg-white p-10 rounded-[2.5rem] border border-slate-50 shadow-xl shadow-slate-100/50 flex-1 flex flex-col justify-center text-center">
             <p className="text-[10px] font-black text-slate-300 uppercase tracking-[0.2em] mb-4">State Duration</p>
@@ -99,20 +82,6 @@ const LiveView: React.FC<LiveViewProps> = ({ data }) => {
               }`}>
                 {data.state}
               </div>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-8">
-            <div className="bg-white p-8 rounded-[2rem] border border-slate-50 shadow-xl shadow-slate-100/50">
-               <p className="text-[10px] font-black text-slate-300 uppercase tracking-widest mb-4">IoT Intensity</p>
-               <div className="h-3 bg-slate-100 rounded-full overflow-hidden">
-                  <div className="h-full bg-[#14b8a6] transition-all duration-300" style={{ width: '65%' }}></div>
-               </div>
-               <p className="text-xl font-black text-slate-800 mt-4">Normal</p>
-            </div>
-            <div className="bg-white p-8 rounded-[2rem] border border-slate-50 shadow-xl shadow-slate-100/50">
-               <p className="text-[10px] font-black text-slate-300 uppercase tracking-widest mb-4">Alert Gate</p>
-               <p className="text-lg font-black text-slate-800 mt-4 leading-tight">After <span className="text-[#14b8a6]">5s</span> slouched</p>
             </div>
           </div>
         </div>

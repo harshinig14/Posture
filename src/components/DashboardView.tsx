@@ -1,10 +1,6 @@
-
 import React from 'react';
-import { PostureData, PostureState, UserProfile } from '../types';
-
-interface DashboardViewProps {
-  data: PostureData;
-}
+import { PostureState } from '../../types';
+import type { PostureData, UserProfile } from '../../types';
 
 const DashboardView: React.FC<{ data: PostureData; profile: UserProfile }> = ({ data, profile }) => {
   const getStatusColor = (state: PostureState) => {
@@ -23,8 +19,9 @@ const DashboardView: React.FC<{ data: PostureData; profile: UserProfile }> = ({ 
     }
   };
 
-  // Precise circumference for r=70: 2 * PI * 70 = 439.82
-  const circumference = 439.82;
+  // Precise circumference for r=70: 2 * PI * 70 = 439.82297
+  const r = 70;
+  const circumference = 2 * Math.PI * r;
   const strokeDashoffset = circumference - (data.score / 100) * circumference;
 
   return (
@@ -35,7 +32,7 @@ const DashboardView: React.FC<{ data: PostureData; profile: UserProfile }> = ({ 
           <p className="text-slate-500 mt-1">Here is your posture overview for today.</p>
         </div>
         <div className="px-4 py-2 bg-white rounded-2xl border border-slate-100 shadow-sm flex items-center gap-2">
-          <span className="w-2 h-2 bg-[#2dd4bf] rounded-full"></span>
+          <span className="w-2 h-2 bg-[#2dd4bf] rounded-full animate-pulse"></span>
           <span className="text-sm font-bold text-slate-600">Smart Guardian Active</span>
         </div>
       </header>
@@ -49,14 +46,16 @@ const DashboardView: React.FC<{ data: PostureData; profile: UserProfile }> = ({ 
              <div className={`absolute inset-4 rounded-full blur-2xl opacity-20 transition-colors duration-1000 ${data.score > 80 ? 'bg-emerald-400' : data.score > 50 ? 'bg-amber-400' : 'bg-rose-400'}`}></div>
              
              <svg className="w-full h-full transform -rotate-90 relative z-10" viewBox="0 0 176 176">
+                {/* Track Circle */}
                 <circle 
-                  cx="88" cy="88" r="70" 
+                  cx="88" cy="88" r={r} 
                   fill="transparent" 
                   stroke="#f1f5f9" 
                   strokeWidth="12" 
                 />
+                {/* Progress Circle */}
                 <circle 
-                  cx="88" cy="88" r="70" 
+                  cx="88" cy="88" r={r} 
                   fill="transparent" 
                   stroke={data.score > 80 ? '#14b8a6' : data.score > 50 ? '#f59e0b' : '#ef4444'} 
                   strokeWidth="12" 

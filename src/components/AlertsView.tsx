@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { AlertLog, PostureState } from '../types';
+import { AlertLog, PostureState } from '../../types';
 
 interface AlertsViewProps {
   alerts: AlertLog[];

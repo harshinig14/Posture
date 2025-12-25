@@ -1,6 +1,6 @@
-
 import React, { useState, useEffect } from 'react';
-import { PostureState, PostureData, TabId, UserProfile, AlertLog, AppView } from './types';
+import { PostureState } from '../types';
+import type { PostureData, TabId, UserProfile, AlertLog, AppView } from '../types';
 import Sidebar from './components/Sidebar';
 import DashboardView from './components/DashboardView';
 import LiveView from './components/LiveView';
@@ -24,7 +24,6 @@ const App: React.FC = () => {
     alertDelay: 5
   });
 
-  // Simulated IoT State
   const [currentPosture, setCurrentPosture] = useState<PostureData>({
     score: 85,
     state: PostureState.GOOD,
@@ -36,7 +35,6 @@ const App: React.FC = () => {
 
   const [alerts, setAlerts] = useState<AlertLog[]>([]);
 
-  // Simulation effect to mimic real-time sensor data updates
   useEffect(() => {
     if (view !== 'dashboard') return;
 

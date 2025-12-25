@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { PostureData } from '../types';
+import { PostureData } from '../../types';
 
 interface InsightsViewProps {
   data: PostureData;

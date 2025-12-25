@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { TabId } from '../types';
+import type { TabId } from '../../types';
 
 interface SidebarProps {
   activeTab: TabId;
@@ -61,14 +61,6 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, onSignOut })
       </nav>
 
       <div className="p-4 mt-auto border-t border-slate-50 space-y-4">
-        <div className="p-4 bg-slate-50 rounded-2xl">
-          <div className="flex items-center gap-2 mb-1">
-            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-            <span className="text-xs font-bold text-slate-700">IoT Active</span>
-          </div>
-          <p className="text-[10px] text-slate-400">Battery: 82%</p>
-        </div>
-
         <button 
           onClick={onSignOut}
           className="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-slate-400 hover:text-rose-500 hover:bg-rose-50 transition-all"
