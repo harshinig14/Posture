@@ -4,10 +4,9 @@ import { PostureData, PostureState, UserProfile } from '../types';
 
 interface DashboardViewProps {
   data: PostureData;
-  profile: UserProfile;
 }
 
-const DashboardView: React.FC<DashboardViewProps> = ({ data, profile }) => {
+const DashboardView: React.FC<{ data: PostureData; profile: UserProfile }> = ({ data, profile }) => {
   const getStatusColor = (state: PostureState) => {
     switch (state) {
       case PostureState.GOOD: return 'text-emerald-600 bg-emerald-50 border-emerald-100';
@@ -23,6 +22,10 @@ const DashboardView: React.FC<DashboardViewProps> = ({ data, profile }) => {
       case PostureState.BAD: return "Time to reset! Sit upright, feet flat on the floor, and pull your chin back.";
     }
   };
+
+  // Precise circumference for r=70: 2 * PI * 70 = 439.82
+  const circumference = 439.82;
+  const strokeDashoffset = circumference - (data.score / 100) * circumference;
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
@@ -42,27 +45,30 @@ const DashboardView: React.FC<DashboardViewProps> = ({ data, profile }) => {
         <div className="bg-white p-8 rounded-[2.5rem] border border-slate-50 shadow-xl shadow-slate-100/50 flex flex-col items-center justify-center text-center">
           <h3 className="text-slate-400 text-xs font-bold uppercase tracking-widest mb-6">Posture Score</h3>
           <div className="relative w-44 h-44 flex items-center justify-center">
-             <svg className="w-full h-full transform -rotate-90">
+             {/* Background Glow */}
+             <div className={`absolute inset-4 rounded-full blur-2xl opacity-20 transition-colors duration-1000 ${data.score > 80 ? 'bg-emerald-400' : data.score > 50 ? 'bg-amber-400' : 'bg-rose-400'}`}></div>
+             
+             <svg className="w-full h-full transform -rotate-90 relative z-10" viewBox="0 0 176 176">
                 <circle 
-                  cx="88" cy="88" r="76" 
+                  cx="88" cy="88" r="70" 
                   fill="transparent" 
                   stroke="#f1f5f9" 
                   strokeWidth="12" 
                 />
                 <circle 
-                  cx="88" cy="88" r="76" 
+                  cx="88" cy="88" r="70" 
                   fill="transparent" 
                   stroke={data.score > 80 ? '#14b8a6' : data.score > 50 ? '#f59e0b' : '#ef4444'} 
                   strokeWidth="12" 
-                  strokeDasharray={477}
-                  strokeDashoffset={477 - (477 * data.score) / 100}
+                  strokeDasharray={circumference}
+                  strokeDashoffset={strokeDashoffset}
                   strokeLinecap="round"
                   className="transition-all duration-1000 ease-out"
                 />
              </svg>
-             <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <span className="text-5xl font-black text-slate-900">{data.score}</span>
-                <span className="text-[10px] text-slate-400 font-black uppercase tracking-widest">Points</span>
+             <div className="absolute inset-0 flex flex-col items-center justify-center z-20">
+                <span className="text-5xl font-black text-slate-900 leading-none">{data.score}</span>
+                <span className="text-[10px] text-slate-400 font-black uppercase tracking-widest mt-1">Points</span>
              </div>
           </div>
           <p className="text-xs text-slate-400 mt-6 font-medium italic">Synced with PostureGuard IoT</p>

@@ -22,7 +22,6 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
           </div>
         </div>
         <div className="flex items-center gap-6">
-          <button onClick={onStart} className="text-sm font-medium hover:text-[#14b8a6] transition-colors">Sign In</button>
           <button onClick={onStart} className="bg-[#14b8a6] text-white px-6 py-2.5 rounded-xl font-bold text-sm hover:bg-[#0d9488] transition-all">
             Get Started
           </button>
@@ -43,12 +42,9 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
           Real-time posture monitoring powered by advanced IoT sensors. Get instant feedback, track your progress, and protect your neck and back health with clear, friendly insights.
         </p>
 
-        <div className="flex flex-col md:flex-row gap-4 mb-20 w-full md:w-auto">
+        <div className="flex justify-center mb-20 w-full">
           <button onClick={onStart} className="bg-[#0d9488] text-white px-10 py-4 rounded-2xl font-bold text-lg hover:shadow-xl hover:shadow-[#14b8a622] transition-all">
             Start Monitoring
-          </button>
-          <button onClick={onStart} className="bg-white text-slate-800 px-10 py-4 rounded-2xl font-bold text-lg border border-slate-100 shadow-sm hover:bg-slate-50 transition-all">
-            View Demo Dashboard
           </button>
         </div>
 
