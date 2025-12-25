@@ -1,0 +1,5 @@
+{
+  "name": "PosturePro - Smart IoT Health Companion",
+  "description": "A modern IoT-based posture monitoring dashboard that provides real-time neck and back health insights, historical summaries, and AI-powered wellness tips.",
+  "requestFramePermissions": []
+}
