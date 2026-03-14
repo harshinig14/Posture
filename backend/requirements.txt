@@ -1,0 +1,13 @@
+fastapi
+uvicorn[standard]
+websockets
+python-multipart
+langchain
+langchain-community
+google-generativeai
+sentence-transformers
+tensorflow
+numpy
+pandas
+scikit-learn
+pyserial
